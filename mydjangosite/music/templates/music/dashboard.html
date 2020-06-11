@@ -1,0 +1,61 @@
+{%  extends 'music/main.html' %}
+
+{% block content %}
+
+{%  include 'music/status.html' %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5>CUSTOMERS:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<table class="table table-sm">
+				<tr>
+
+					<th>Customer</th>
+					<th>Phone</th>
+				</tr>
+				{% for i in Customers %}
+				<tr>
+					<td><a href="{% url 'customer' i.id %}">{{i.Name}}</a></td>  <!- we can use the name of the url so that if path changes doesnt affect ->
+					<td>{{i.Mobile}}</td>
+				{% endfor %}
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>LAST 5 ORDERS</h5>
+		<hr>
+		<div class="card card-body">
+
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+				{% for i in Orders %}
+				<tr>
+					<td>{{i.Product}}</td>
+					<td>{{i.Date_Created}}</td>
+					<td>{{i.status}}</td>
+					<td><a class="btn btn-sm btn-info"href="{% url 'updateorder' i.id %}">Update</a> </td>
+					<td><a class="btn btn-sm btn-danger"href="{% url 'deleteorder' i.id %}">Delete</a> </td>
+				{% endfor %}
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
